@@ -1,0 +1,22 @@
+syntax = "proto3"; // proto 版本
+option go_package = "github.com/bill-lhr/grpc-demo/proto/order"; // 生产的pb.go文件所属包
+package proto.order; // 包名
+
+// 编码规范
+// message、service 采用驼峰，字段名下划线分割
+// 请求参数
+message OrderInfo {
+  string order_id = 1; // 数字标识号，用于二进制中识别各个字段；尽量为频繁出现的元素保留1-15号
+  string order_name = 2;
+  string order_status = 3;
+}
+
+// 请求参数
+message OrderRequest {
+  string order_id = 1;
+  int64 timestamp = 2;
+}
+
+service OrderService {
+  rpc GetOrderInfo(OrderRequest) returns (OrderInfo);
+}
